@@ -1,4 +1,4 @@
-using GameNetcodeStuff;
+﻿using GameNetcodeStuff;
 using HarmonyLib;
 using System;
 using UnityEngine;
@@ -522,9 +522,8 @@ namespace TooManyEmotes.Patches
 
             if (emoteControllerLocal.IsPerformingCustomEmote())
             {
-                var heldItemResult = localPlayerController.ResolveHeldItem();
-                var heldItem = heldItemResult.Item;
-                if (heldItemResult.IsValid && heldItem)
+                var heldItem = localPlayerController.GetHeldGrabbableSafe();
+                if (heldItem)
                 {
                     heldItem.parentObject = firstPersonEmotesEnabled ? localPlayerController.localItemHolder : localPlayerController.serverItemHolder;
                     if (EmoteControllerPlayer.emoteControllerLocal.emotingProps.Count > 0)
